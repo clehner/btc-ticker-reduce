@@ -35,7 +35,7 @@ $8 ~ currency {
 	running_total += total
 	running_average = running_total/running_volume
 
-	printf "$%.0f\n", running_average
+	printf "%.0f\n", running_average
 	fflush()
 }
 
