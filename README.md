@@ -6,7 +6,7 @@ output, written in Awk.
 ## Data source
 
 `btc-ticker-reduce` uses data from Bitcoinchart's experimental
-[http://bitcoincharts.com/about/markets-api/#footer](streaming socket API),
+[streaming socket API](http://bitcoincharts.com/about/markets-api/#footer),
 for which the following disclaimer is made: *"This service is strictly for
 personal use. Do not assume this data to be 100% accurate or write trading
 bots that rely on it."*
@@ -62,14 +62,14 @@ btc-ticker-reduce -v halflife=360 -v currency=USD btc.json
 ## Use cases
 
 * Put the ticker into a status bar using e.g.
-  [http://i3wm.org/i3bar/](i3bar) and [https://github.com/clehner/i3bar-mux](i3bar-mux).
+  [i3bar](http://i3wm.org/i3bar/) and [i3bar-mux](https://github.com/clehner/i3bar-mux).
 
 ## Why awk?
 
 It is a simple enough language for a simple program. It is lightweight and
 portable. It is good for processing streams of text.
 
-# License
+## License
 
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
 
