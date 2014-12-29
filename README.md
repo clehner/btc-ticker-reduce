@@ -71,7 +71,7 @@ portable. It is good for processing streams of text.
 
 # License
 
-[https://creativecommons.org/publicdomain/zero/1.0/](![http://i.creativecommons.org/p/zero/1.0/88x31.png](CC0))
+[![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
 
 To the extent possible under law, Charles Lehner has waived all copyright and
 related or neighboring rights to this program. This work is published from the United States.
