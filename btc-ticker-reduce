@@ -1,0 +1,41 @@
+#!/usr/bin/awk -f
+#
+# btc-ticker-reduce
+# Public Domain.
+#
+# Usage: nc api.bitcoincharts.com 27007 | \
+#	btc-ticker-reduce -v halflife=360 -v currency=USD
+
+BEGIN {
+	running_volume = 0
+	running_total = 0
+	time_previous = systime()
+	if (!halflife) {
+		halflife = 3600
+	}
+	if (!currency) {
+		currency = "USD"
+	}
+}
+
+$8 ~ currency {
+	volume = strtonum($2)
+	price = strtonum($6)
+	time_current = strtonum($4)
+
+	time_diff = time_current - time_previous
+	time_previous = time_current
+
+	backoff = 2 ^ -(time_diff / halflife)
+	running_total *= backoff
+	running_volume *= backoff
+
+	total = price * volume
+	running_volume += volume
+	running_total += total
+	running_average = running_total/running_volume
+
+	printf "$%.0f\n", running_average
+	fflush()
+}
+
