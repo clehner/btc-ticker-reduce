@@ -23,6 +23,7 @@ $8 ~ currency {
 	price = strtonum($6)
 	time_current = strtonum($4)
 
+	total = price * volume
 	time_diff = time_current - time_previous
 	time_previous = time_current
 
@@ -36,10 +37,9 @@ $8 ~ currency {
 		running_volume = (running_volume * backoff) + volume
 	}
 
-	total = price * volume
-	running_average = running_total/running_volume
+	running_price = running_total/running_volume
 
-	printf "%.0f\n", running_average
+	printf "%.0f\n", running_price
 	fflush()
 }
 

@@ -1,6 +1,6 @@
 # btc-ticker-reduce
 
-This is a BTC ticker with volume-weighted sliding average and line-based
+BTC ticker with volume-weighted sliding average and line-based
 output, written in Awk.
 
 ## Data source
@@ -23,7 +23,8 @@ discount factor exponentially increases as the time since last trade increases,
 and depends on the `halflife` variable. `halflife` represents the number of
 seconds since the last trade after which the running total and volume is
 weighted by half of what it was weighted at the time of the last trade. We
-output the running average after the weight adjustment, on its own line.
+output the running average after the weight adjustment, on its own line, one
+line per trade.
 
 ## Usage
 
