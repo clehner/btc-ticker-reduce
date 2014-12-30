@@ -26,6 +26,17 @@ weighted by half of what it was weighted at the time of the last trade. We
 output the running average after the weight adjustment, on its own line, one
 line per trade.
 
+Sometimes trades from LocalBitcoins trades are encountered which have
+timestamps from far in the past, e.g. several days or weeks. It may be that
+these timestamps were of when the trade was initiated, and they were only
+finalized presently. We treat these trades as if they happened presently. When
+finding such a trade exceeding an age threshold, we note the timestamp
+difference since the trade before it. Then we wait until subsequent trades
+"catch up" to the previous time by negating this time difference, before using
+exponential backoff again. In this way we maintain the running total/volume
+when processing far out-of-order trades which would otherwise overwhelm the
+running total/volume with large exponent values.
+
 ## Usage
 
 Use `netcat`/`ncat`/`nc` or `socat` or similar to pipe the socket data through
@@ -59,9 +70,6 @@ btc-ticker-reduce -v halflife=360 -v currency=USD btc.json
 
 * Get exchange rates between foreign currencies so that all trades can be
   used for data, rather than just trades in one foreign currency at a time.
-
-* Handle trades that are far out of order (e.g. by several days), without
-  losing the accumulated running total/volume.
 
 * Handle possible changes to the JSON input, i.e. fields being in an unexpected
   order.

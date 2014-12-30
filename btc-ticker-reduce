@@ -10,6 +10,7 @@ BEGIN {
 	running_volume = 0
 	running_total = 0
 	time_previous = 0
+	catchup = 0
 	if (!halflife) {
 		halflife = 3600
 	}
@@ -28,12 +29,27 @@ $8 ~ currency {
 	time_previous = time_current
 	halflives = time_diff/halflife
 
+	if (catchup > 0) {
+		catchup -= halflives
+		if (catchup < 4) {
+			# resume threshold
+			halflives = catchup
+		} else {
+			# placeholder
+			halflives = 0
+		}
+	}
+
 	if (halflives == 0) {
 		backoff = 1
 	} else if (halflives > 1074) {
+		# this trade was far later than the previous trade,
+		# so discard previous running total/volume
 		backoff = 0
-	} else if (halflives < -1023) {
+	} else if (halflives < -32) {
+		# this trade was too far in the past to affect the current price
 		backoff = 1e15
+		catchup = -halflives
 	} else {
 		backoff = 2 ^ -halflives
 	}
