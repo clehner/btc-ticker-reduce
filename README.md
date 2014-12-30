@@ -59,6 +59,9 @@ btc-ticker-reduce -v halflife=360 -v currency=USD btc.json
 * Get exchange rates between foreign currencies so that all trades can be
   used for data, rather than just trades in one foreign currency at a time.
 
+* Handle trades that are far out of order (e.g. by several days), without
+  losing the accumulated running total/volume.
+
 ## Use cases
 
 * Put the ticker into a status bar using e.g.

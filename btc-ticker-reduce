@@ -26,13 +26,17 @@ $8 ~ currency {
 	time_diff = time_current - time_previous
 	time_previous = time_current
 
-	backoff = 2 ^ -(time_diff / halflife)
-	running_total *= backoff
-	running_volume *= backoff
+	if (time_diff == 0) {
+		backoff = 1
+	} else {
+		backoff = 2 ^ -(time_diff / halflife)
+	}
+	if (backoff < 1e15) {
+		running_total = (running_total * backoff) + total
+		running_volume = (running_volume * backoff) + volume
+	}
 
 	total = price * volume
-	running_volume += volume
-	running_total += total
 	running_average = running_total/running_volume
 
 	printf "%.0f\n", running_average
