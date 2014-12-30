@@ -56,12 +56,12 @@ btc-ticker-reduce -v halflife=360 -v currency=USD btc.json
 
 ## Options/variables
 
-* **halflife** (`-v halflife=...`) - amount of smoothing to do, in seconds. Use
+* **halflife** (`-v halflife=3600`) - amount of smoothing to do, in seconds. Use
   30 (half a minute) for very little smoothing, or 3600 (1 hour) for lots of
   smoothing.
 
-* **currency** (`-v currency=...`) - which secondary currency to use. e.g. USD,
-  CNY.
+* **currency** (`-v currency=USD`) - which secondary currency to use. e.g. USD,
+  CNY, EUR.
 
 ## Future work
 
