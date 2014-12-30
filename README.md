@@ -63,6 +63,9 @@ btc-ticker-reduce -v halflife=360 -v currency=USD btc.json
 * Handle trades that are far out of order (e.g. by several days), without
   losing the accumulated running total/volume.
 
+* Handle possible changes to the JSON input, i.e. fields being in an unexpected
+  order.
+
 ## Use cases
 
 * Put the ticker into a status bar using e.g.
