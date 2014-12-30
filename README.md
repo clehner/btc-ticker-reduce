@@ -63,6 +63,9 @@ btc-ticker-reduce -v halflife=360 -v currency=USD btc.json
 * **currency** (`-v currency=USD`) - which secondary currency to use. e.g. USD,
   CNY, EUR.
 
+* **format** (`-v format=%f`) - printf format for the ticker price output,
+  e.g. `$%.2f` for two decimal places and a dollar sign.
+
 ## Future work
 
 * Keep track of moving averages per exchange, so that the outliers of e.g.

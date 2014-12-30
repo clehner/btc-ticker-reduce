@@ -4,7 +4,7 @@
 # Public Domain.
 #
 # Usage: nc api.bitcoincharts.com 27007 | \
-#	btc-ticker-reduce -v halflife=360 -v currency=USD
+#	btc-ticker-reduce -v halflife=360 -v currency=USD -v format='$%.2f'
 
 BEGIN {
 	running_volume = 0
@@ -16,6 +16,9 @@ BEGIN {
 	}
 	if (!currency) {
 		currency = "USD"
+	}
+	if (!format) {
+		format = "%f"
 	}
 }
 
@@ -60,7 +63,7 @@ $8 ~ currency {
 
 	running_price = running_total/running_volume
 
-	printf "%.0f\n", running_price
+	printf format "\n", running_price
 	fflush()
 }
 
