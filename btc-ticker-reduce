@@ -26,15 +26,16 @@ $8 ~ currency {
 	total = price * volume
 	time_diff = time_current - time_previous
 	time_previous = time_current
+	halflives = time_diff/halflife
 
-	if (time_diff == 0) {
+	if (halflives == 0) {
 		backoff = 1
-	} else if (time_diff > 3e6) {
+	} else if (halflives > 1074) {
 		backoff = 0
-	} else if (time_diff < -3e6) {
+	} else if (halflives < -1023) {
 		backoff = 1e15
 	} else {
-		backoff = 2 ^ -(time_diff / halflife)
+		backoff = 2 ^ -halflives
 	}
 	if (backoff < 1e15) {
 		running_total = (running_total * backoff) + total
