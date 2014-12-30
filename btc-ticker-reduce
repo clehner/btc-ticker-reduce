@@ -19,9 +19,9 @@ BEGIN {
 }
 
 $8 ~ currency {
-	volume = strtonum($2)
-	price = strtonum($6)
-	time_current = strtonum($4)
+	volume = $2
+	price = $6
+	time_current = $4
 
 	total = price * volume
 	time_diff = time_current - time_previous
