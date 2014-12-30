@@ -9,7 +9,7 @@
 BEGIN {
 	running_volume = 0
 	running_total = 0
-	time_previous = systime()
+	time_previous = 0
 	if (!halflife) {
 		halflife = 3600
 	}
